@@ -7,7 +7,7 @@
 
 import Foundation
 
-class YZYMD5: NSObject {
+public class YZYMD5: NSObject {
     
     var a: Int32
     var b: Int32
