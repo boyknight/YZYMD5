@@ -19,7 +19,7 @@ public class YZYMD5: NSObject {
     var buffer_length: Int
     var total_length: Int64
     
-    override init() {
+    override public init() {
         self.a = 1732584193
         self.b = -271733879
         self.c = -1732584194

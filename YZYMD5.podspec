@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                = "YZYMD5"
-  s.version             = "1.0.0"
+  s.version             = "1.0.2"
   s.summary             = "Compute MD5 hash of string or file with small memory usage, implemented in pure Swift, support iOS and MacOS"
   s.description         = <<-DESC
                         Compute MD5 hash of string or file with small memory usage, implemented in pure Swift, support iOS and MacOS.
