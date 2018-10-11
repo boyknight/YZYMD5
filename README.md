@@ -1,37 +1,27 @@
-## Welcome to GitHub Pages
+## YZYMD5
 
-You can use the [editor on GitHub](https://github.com/boyknight/YZYMD5/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+YZYMD5用Swift编程语言编写，用来计算文本和文件的MD5值，对于大文件只占用极少的内存。
+YZYMD5可以用在iOS和MacOS的开发上。
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### 示例
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+计算文本字符串
 
 ```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+let md5 = YZYMD5()
+md5.update("hello world")
+print(md5.digestHex())
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+输出：
 
-**Bold** and _Italic_ and `Code` text
+5EB63BBBE01EEED093CB22BB8F5ACDC3
 
-[Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
+### 和我联系
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/boyknight/YZYMD5/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+我的邮箱是：[14497294@qq.com](14497294@qq.com)，欢迎交流。
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
