@@ -19,6 +19,13 @@ public class YZYMD5: NSObject {
     var buffer_length: Int
     var total_length: Int64
     
+    var temp_uint8_1: UInt8 = 0
+    var temp_uint8_2: UInt8 = 0
+    var temp_uint8_3: UInt8 = 0
+    var temp_uint8_4: UInt8 = 0
+    
+    var temp_int32: Int32 = 0
+    
     override public init() {
         self.a = 1732584193
         self.b = -271733879
@@ -221,27 +228,59 @@ public class YZYMD5: NSObject {
         return result
     }
     
-    private func concat_uint8_to_int32(_ source: [UInt8]) -> Int32 {
-        var result: Int32 = 0
+    private func concat_4_uint8_to_int32(_ uint8_1: UInt8,
+                                         _ uint8_2: UInt8,
+                                         _ uint8_3: UInt8,
+                                         _ uint8_4: UInt8) -> Int32 {
+        self.temp_int32 = 0
         
-        result = result | ( Int32(source[3]) << 24 )
-        result = result | ( Int32(source[2]) << 16 )
-        result = result | ( Int32(source[1]) << 8 )
-        result = result | Int32(source[0])
+        self.temp_int32 = self.temp_int32 | Int32(uint8_4) << 24
+        self.temp_int32 = self.temp_int32 | Int32(uint8_3) << 16
+        self.temp_int32 = self.temp_int32 | Int32(uint8_2) << 8
+        self.temp_int32 = self.temp_int32 | Int32(uint8_1)
         
-        return result
+        return self.temp_int32
     }
     
     private func set_uint8_to_int32(_ source: Int32, _ position: Int, _ value: UInt8) -> Int32 {
         
-        var uint8_array: [UInt8] = [UInt8](repeating: 0, count: 4)
-        for i in 0..<4 {
-            uint8_array[i] = self.get_uint8_from_int32(source, i)
+        switch position {
+        case 0:
+            self.temp_uint8_1 = value
+            self.temp_uint8_2 = self.get_uint8_from_int32(source, 1)
+            self.temp_uint8_3 = self.get_uint8_from_int32(source, 2)
+            self.temp_uint8_4 = self.get_uint8_from_int32(source, 3)
+            
+        case 1:
+            self.temp_uint8_1 = self.get_uint8_from_int32(source, 0)
+            self.temp_uint8_2 = value
+            self.temp_uint8_3 = self.get_uint8_from_int32(source, 2)
+            self.temp_uint8_4 = self.get_uint8_from_int32(source, 3)
+            
+        case 2:
+            self.temp_uint8_1 = self.get_uint8_from_int32(source, 0)
+            self.temp_uint8_2 = self.get_uint8_from_int32(source, 1)
+            self.temp_uint8_3 = value
+            self.temp_uint8_4 = self.get_uint8_from_int32(source, 3)
+            
+            
+        case 3:
+            self.temp_uint8_1 = self.get_uint8_from_int32(source, 0)
+            self.temp_uint8_2 = self.get_uint8_from_int32(source, 1)
+            self.temp_uint8_3 = self.get_uint8_from_int32(source, 2)
+            self.temp_uint8_4 = value
+            
+        default:
+            self.temp_uint8_1 = 0
+            self.temp_uint8_2 = 0
+            self.temp_uint8_3 = 0
+            self.temp_uint8_4 = 0
         }
         
-        uint8_array[position] = value
-        
-        return self.concat_uint8_to_int32(uint8_array)
+        return self.concat_4_uint8_to_int32(self.temp_uint8_1,
+                                            self.temp_uint8_2,
+                                            self.temp_uint8_3,
+                                            self.temp_uint8_4)
     }
     
     private func md5_compress() {
