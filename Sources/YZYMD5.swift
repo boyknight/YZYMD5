@@ -444,6 +444,8 @@ public class YZYMD5: NSObject {
     
     private func set_total_length_to_buffer() {
         self.buffer[14] = Int32( (self.total_length << 32) >> 32 )
-        self.buffer[15] = Int32( (self.total_length >> 32) << 32 )
+//        self.buffer[15] = Int32( (self.total_length >> 32) << 32 )
+        self.buffer[15] = Int32( self.total_length >> 32 )
+        
     }
 }
